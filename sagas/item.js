@@ -1,33 +1,33 @@
 import { all, fork, delay, takeLatest, put, call } from '@redux-saga/core/effects';
 import axios from 'axios';
 
-// import reducer
-import {} from ''; // from '../reducers/item';
+// Reducer
+import { GET_ITEMS_REQUEST, GET_ITEMS_SUCCESS, GET_ITEMS_FAILURE } from '../reducers/item';
 
-//* LOAD_POST
-function loadPostAPI(data) {
-  return axios.get(`/post/${data}`);
+// LOAD_ITEMS
+function loadItemsAPI(data) {
+  return axios.get(`/admin/items`);
 }
-function* loadPost(action) {
+function* loadItems(action) {
   try {
-    const result = yield call(loadPostAPI, action.data);
+    const result = yield call(loadItemsAPI);
     yield put({
-      type: LOAD_POST_SUCCESS,
+      type: GET_ITEMS_SUCCESS,
       data: result.data,
     });
   } catch (err) {
     console.error(err);
     put({
-      type: LOAD_POST_FAILURE,
+      type: GET_ITEMS_FAILURE,
       error: err.response.data,
     });
   }
 }
 
-function* watchLoadPost() {
-  yield takeLatest(LOAD_POST_REQUEST, loadPost);
+function* watchLoadItems() {
+  yield takeLatest(GET_ITEMS_REQUEST, loadItems);
 }
 
 export default function* postSaga() {
-  yield all([fork(watchLoadPost)]);
+  yield all([fork(watchLoadItems)]);
 }

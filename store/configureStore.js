@@ -16,16 +16,16 @@ const loggerMiddleware =
   };
 
 const configureStore = () => {
-  const sagaMiddleware = createSagaMiddleware(); // redux-saga
-  // const middlewares = [sagaMiddleware, loggerMiddleware]; // 추후 saga || thunk 를 넣기 위한 배열 생성
-  const enhancer = // 배포용일떄 ? devTool 연결 X : devTool 연결 O
+  const sagaMiddleware = createSagaMiddleware();
+  const enhancer =
     process.env.NODE_ENV === 'production'
       ? compose(applyMiddleware(sagaMiddleware))
       : composeWithDevTools(applyMiddleware(sagaMiddleware, loggerMiddleware));
-  const store = createStore(reducer, enhancer); // state와 reducer를 포함하는게 store
+  const store = createStore(reducer, enhancer);
   store.sagaTask = sagaMiddleware.run(rootSaga);
   return store;
 };
+
 const wrapper = createWrapper(configureStore, {
   debug: process.env.NODE_ENV === 'development',
 });

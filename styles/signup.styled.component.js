@@ -19,7 +19,7 @@ export const Form = styled.form`
   text-align: center;
 
   width: 500px;
-  height: 500px;
+  height: 635px;
 
   label {
     display: none;

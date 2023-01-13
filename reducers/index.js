@@ -1,5 +1,5 @@
-import { HYDRATE } from 'next-redux-wrapper'; // SSR(Server Side Rendering)을 위함
 import { combineReducers } from 'redux'; // combineReducers은 reducer 함수를 합쳐주는 역할
+import { HYDRATE } from 'next-redux-wrapper'; // SSR(Server Side Rendering)을 위함
 // spliting reducer
 import user from './user';
 import item from './item';
@@ -11,7 +11,7 @@ import item from './item';
 const rootReducer = (state, action) => {
   switch (action.type) {
     case HYDRATE:
-      return action.payload;
+      return { ...state, ...action.payload };
     default: {
       const combinedReducer = combineReducers({
         user,

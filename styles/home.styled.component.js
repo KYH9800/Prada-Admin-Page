@@ -27,7 +27,25 @@ export const Form = styled.form`
 `;
 
 export const InputWrapper = styled.div`
-  margin-top: 18%;
+  margin: 11% auto 0 auto;
+  width: 220px;
+
+  .warning {
+    margin-left: 10px;
+    font-size: 13px;
+    color: #ff5151;
+  }
+
+  .success {
+    margin-left: 10px;
+    font-size: 13px;
+    color: blue;
+  }
+
+  p {
+    text-align: start;
+    margin-bottom: 3px;
+  }
 
   input {
     width: 220px;
@@ -38,7 +56,7 @@ export const InputWrapper = styled.div`
   }
 
   .userID {
-    margin-bottom: 4px;
+    margin-bottom: 10px;
   }
 
   .userPW {

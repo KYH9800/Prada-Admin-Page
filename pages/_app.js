@@ -1,7 +1,10 @@
 import '../styles/globals.css';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 
-export default function App({ Component, pageProps }) {
+import wrapper from '../store/configureStore';
+
+const App = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
@@ -13,4 +16,10 @@ export default function App({ Component, pageProps }) {
       <Component {...pageProps} />
     </>
   );
-}
+};
+
+App.propTypes = {
+  Component: PropTypes.func.isRequired,
+};
+
+export default wrapper.withRedux(App);
